@@ -7,28 +7,25 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif; }
+        body { font-family: "Pretendard Variable", Pretendard, sans-serif; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
 
     <nav class="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100">
-        <div class="max-w-6xl mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="index.html" class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-blue-700 rounded-lg flex items-center justify-center">
-                    <span class="text-white font-bold text-sm">YS</span>
-                </div>
-                <span class="font-bold text-xl tracking-tight text-slate-800">(주)윤성디앤씨</span>
+        <div class="max-w-7xl mx-auto px-6 py-2 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="logo.png" alt="(주)윤성디앤씨 로고" class="h-12 w-auto"> 
             </a>
-
-            <ul class="flex gap-8 font-semibold text-sm text-gray-600 uppercase tracking-tighter">
+            <ul class="flex gap-8 font-semibold text-gray-700">
                 <li><a href="index.html" class="text-blue-600">홈</a></li>
                 <li><a href="service.html" class="hover:text-blue-600 transition">서비스</a></li>
                 <li><a href="portfolio.html" class="hover:text-blue-600 transition">현장정보</a></li>
-                <li><a href="report.html" class="bg-slate-900 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">리포트 신청</a></li>
+                <li><a href="report.html" class="bg-slate-900 text-white px-5 py-2.5 rounded-lg text-sm hover:bg-blue-700 transition shadow-sm">리포트 신청</a></li>
             </ul>
         </div>
     </nav>
+
     <header class="relative bg-slate-900 text-white py-24 px-6 overflow-hidden">
         <div class="absolute inset-0 opacity-30 bg-[url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')] bg-cover bg-center"></div>
         <div class="relative max-w-5xl mx-auto text-center">
@@ -39,7 +36,7 @@
             <p class="text-xl md:text-2xl text-gray-300 mb-10">YSDNC가 제안하는 프리미엄 사옥 컨설팅</p>
             <div class="flex flex-col md:flex-row justify-center gap-4">
                 <a href="tel:1577-8664" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition">전화 문의: 1577-8664</a>
-                <a href="#report" class="bg-white text-slate-900 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition">비공개 리포트 신청</a>
+                <a href="report.html" class="bg-white text-slate-900 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition">비공개 리포트 신청</a>
             </div>
         </div>
     </header>
@@ -57,54 +54,16 @@
         </div>
     </section>
 
-    <section class="py-20 bg-slate-100 px-6">
-        <div class="max-w-5xl mx-auto">
-            <h3 class="text-3xl font-bold text-center mb-12">[CEO 대외비] 1,500만 원의 기적 : 실투자금 분석</h3>
-            <div class="overflow-x-auto bg-white rounded-xl shadow-lg">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-slate-800 text-white">
-                            <th class="p-4 border">항목</th>
-                            <th class="p-4 border text-right">금액</th>
-                            <th class="p-4 border">비고</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="p-4 border font-semibold text-gray-700">총 소요 자금</td>
-                            <td class="p-4 border text-right text-red-600">1억 1,400만 원</td>
-                            <td class="p-4 border text-sm text-gray-500">분양가 30% (계약금 및 잔금)</td>
-                        </tr>
-                        <tr class="bg-blue-50">
-                            <td class="p-4 border font-semibold text-blue-800">즉시 회수 혜택 (-)</td>
-                            <td class="p-4 border text-right font-bold text-blue-600">9,880만 원</td>
-                            <td class="p-4 border text-sm text-gray-500">분양가의 26% 파격 지원</td>
-                        </tr>
-                        <tr class="bg-slate-50 font-bold text-xl">
-                            <td class="p-4 border">최종 실투자금</td>
-                            <td class="p-4 border text-right text-blue-700 font-black italic">1,520만 원</td>
-                            <td class="p-4 border text-sm">약 1,500만 원대로 사옥 마련</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="text-center mt-6 text-gray-500 text-sm">* 분양가 3.8억 기준 최적 자금 시뮬레이션입니다.</p>
-        </div>
-    </section>
-
-    <footer class="bg-slate-900 text-gray-400 py-12 px-6">
+    <footer class="bg-slate-900 text-gray-400 py-12 px-6 mt-20">
         <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10">
             <div>
                 <h4 class="text-white text-xl font-bold mb-4">(주)윤성디앤씨</h4>
                 <p>대표이사: 강채원 | 사업자번호: 616-88-02344</p>
                 <p>주소: 경기도 평택시 고덕면 도시지원1길 49, W-tower 1층</p>
-                <p class="mt-4">이메일: ysdnc.ceo@gmail.com</p>
             </div>
-            <div class="text-right">
-                <p class="text-white mb-2 font-bold">상담 가능 시간</p>
-                <p>평일/주말 09:00 ~ 20:00</p>
-                <div class="mt-6 flex justify-end gap-4">
-                    <button class="bg-yellow-400 text-black px-6 py-2 rounded-full font-bold">카톡 상담</button>
+            <div class="text-right flex flex-col items-end">
+                <p class="text-white mb-2 font-bold">상담 가능 시간: 09:00 ~ 20:00</p>
+                <div class="mt-6 flex gap-4">
                     <a href="tel:1577-8664" class="bg-white text-black px-6 py-2 rounded-full font-bold italic">Call: 1577-8664</a>
                 </div>
             </div>
