@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Insight | (주)윤성 D&C</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="logo.png" type="image/png">
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .insight-card { transition: all 0.3s ease; border: 1px solid #e5e7eb; }
+        .insight-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .data-value { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="logo.png" alt="윤성D&C" class="h-10 w-auto mr-2">
+            </a>
+            <div class="hidden md:flex space-x-8 font-medium">
+                <a href="index.html" class="hover:text-blue-600 transition">홈</a>
+                <a href="service.html" class="hover:text-blue-600 transition">서비스</a>
+                <a href="insight.html" class="text-blue-600 font-bold">마켓 인사이트</a>
+            </div>
+            <a href="index.html#contact" class="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-700 transition">상담 신청</a>
+        </div>
+    </nav>
+
+    <header class="gradient-bg py-20 text-white text-center">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Market Insight</h1>
+            <p class="text-xl text-blue-100 max-w-2xl mx-auto">데이터는 거짓말을 하지 않습니다. 윤성 D&C가 분석한 평택 시장의 지표로 성공적인 투자의 근거를 확인하십시오.</p>
+        </div>
+    </header>
+
+    <section class="py-24 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div id="insight-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                </div>
+            
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                    <p class="text-sm font-bold text-gray-400 mb-2">REFERENCE 01. 세제 혜택 분석</p>
+                    <img src="page1.jpg" alt="세제 혜택" class="w-full rounded-lg">
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                    <p class="text-sm font-bold text-gray-400 mb-2">REFERENCE 02. 공급가/원가 추이</p>
+                    <img src="page2.png" alt="원가 그래프" class="w-full rounded-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <img src="logo.png" alt="Logo" class="h-8 w-auto mx-auto mb-6 opacity-50 grayscale">
+            <p class="text-sm">© 2024 (주)윤성 D&C. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 관리용 데이터 객체
+        const insightData = [
+            {
+                sub: "삼성의 미래",
+                title: "삼성은 평택을 멈출 수 없습니다",
+                desc: "HBM4 물량 확보 및 P5 공정 재개. 실적 극대화의 핵심 요충지는 평택입니다.",
+                val: 12, unit: "조 원", img: "page1.jpg"
+            },
+            {
+                sub: "수급 현황",
+                title: "미분양 무덤에서 인구 유입 1위로",
+                desc: "25년 1월 대비 26년 1월 미분양 수치 50% 이상 광속 소진 기록.",
+                val: 54, unit: "%", img: "page2.png"
+            },
+            {
+                sub: "인구 구조",
+                title: "전국 유일의 2040 폭발 도시",
+                desc: "평택시 경제활동 인구 비중 약 50% 육박. 젊은 도시가 가치를 결정합니다.",
+                val: 50, unit: "%", img: "page1.jpg"
+            },
+            {
+                sub: "가격 분석",
+                title: "건축 원가보다 저렴한 마지막 구간",
+                desc: "신축 원가 평당 1,500만 원 vs 현재 마피 급매가 평당 700만 원 선.",
+                val: 700, unit: "만 원", img: "page2.png"
+            }
+        ];
+
+        function render() {
+            const grid = document.getElementById('insight-grid');
+            grid.innerHTML = insightData.map(item => `
+                <div class="insight-card bg-white p-8 rounded-3xl">
+                    <p class="text-blue-600 font-bold text-sm mb-2">${item.sub}</p>
+                    <h3 class="text-xl font-bold mb-6 leading-tight h-14">${item.title}</h3>
+                    <div class="mb-6">
+                        <span class="data-value text-4xl font-bold text-blue-900" data-target="${item.val}">0</span>
+                        <span class="text-gray-500 font-bold">${item.unit}</span>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function animate() {
+            const counters = document.querySelectorAll('.data-value');
+            counters.forEach(c => {
+                const target = +c.getAttribute('data-target');
+                let now = 0;
+                const step = target / 40;
+                const timer = setInterval(() => {
+                    now += step;
+                    if (now >= target) {
+                        c.innerText = target.toLocaleString();
+                        clearInterval(timer);
+                    } else {
+                        c.innerText = Math.floor(now).toLocaleString();
+                    }
+                }, 30);
+            });
+        }
+
+        render();
+        // 스크롤 감지 후 애니메이션 실행
+        let done = false;
+        window.onscroll = () => {
+            if (window.scrollY > 200 && !done) {
+                animate();
+                done = true;
+            }
+        };
+    </script>
+</body>
+</html>
