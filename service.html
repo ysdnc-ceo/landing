@@ -191,5 +191,26 @@
         menuBtn.addEventListener('click', () => { mobileMenu.classList.remove('hidden'); });
         closeBtn.addEventListener('click', () => { mobileMenu.classList.add('hidden'); });
     </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuBtn = document.getElementById('mobile-menu-btn'); // 햄버거 버튼
+        const closeBtn = document.getElementById('close-btn');       // X 닫기 버튼
+        const mobileMenu = document.getElementById('mobile-menu');   // 메뉴 창
+
+        // 햄버거 버튼 누르면 메뉴 열기 (hidden 클래스 제거)
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+        }
+
+        // X 버튼 누르면 메뉴 다시 닫기 (hidden 클래스 추가)
+        if (closeBtn && mobileMenu) {
+            closeBtn.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+        }
+    });
+</script>
 </body>
 </html>
