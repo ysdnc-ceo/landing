@@ -180,12 +180,12 @@
 
     <script>
         const blogId = "kcwlove12"; 
-        // 네이버는 주소에서 카테고리를 걸러주지 않으므로 기본 주소를 사용합니다.
         const blogRss = `https://rss.blog.naver.com/${blogId}`;
         const apiURL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(blogRss)}`;
 
-        // 🎯 [매우 중요] 대표님 블로그의 실제 카테고리 이름(텍스트)을 아래에 정확히 적어주세요! (띄어쓰기까지 똑같아야 합니다)
-        const targetCategoryName = "마켓 인사이트"; 
+        // 🎯 [수정된 부분] 깐깐한 전체 이름 대신 '핵심 단어(키워드)'만 적어주세요!
+        // 예: "마켓", "인사이트", "리포트" 등
+        const targetKeyword = "마켓"; 
 
         async function loadBlogPosts() {
             const briefingList = document.getElementById('blog-list');
@@ -194,12 +194,11 @@
                 const data = await response.json();
 
                 if (data.status === 'ok') {
-                    // ⭐ 핵심 기능: 네이버가 준 전체 글 중에서 이름이 똑같은 카테고리만 건져냅니다.
+                    // ⭐ 핵심 기능: 카테고리 이름에 '마켓'이라는 단어가 '포함'되어 있으면 통과!
                     const filteredPosts = data.items.filter(post => {
-                        return post.categories && post.categories.includes(targetCategoryName);
+                        return post.categories && post.categories.some(cat => cat.includes(targetKeyword));
                     });
 
-                    // 건져낸 글이 1개라도 있다면 화면에 그립니다.
                     if (filteredPosts.length > 0) {
                         briefingList.innerHTML = filteredPosts.slice(0, 5).map(post => {
                             const dateStr = post.pubDate.split(' ')[0].replace(/-/g, '.');
@@ -219,8 +218,7 @@
                             `;
                         }).join('');
                     } else {
-                        // 걸러낸 글이 없을 경우
-                        briefingList.innerHTML = `<div class="py-12 text-center text-gray-500">최근 업데이트된 리포트가 없습니다.</div>`;
+                        briefingList.innerHTML = `<div class="py-12 text-center text-gray-500">해당 카테고리에 최근 업데이트된 리포트가 없습니다.</div>`;
                     }
                 }
             } catch (error) {
