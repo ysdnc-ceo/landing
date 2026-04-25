@@ -180,11 +180,12 @@
 
     <script>
         const blogId = "kcwlove12"; 
-        // 대표님이 찾아주신 6번 카테고리 주소 적용!
-        const blogRss = `https://rss.blog.naver.com/${blogId}?categoryNo=6`;
-        
-        // 특수기호(? =)가 오류를 내지 않도록 encodeURIComponent 로 감싸주기
+        // 네이버는 주소에서 카테고리를 걸러주지 않으므로 기본 주소를 사용합니다.
+        const blogRss = `https://rss.blog.naver.com/${blogId}`;
         const apiURL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(blogRss)}`;
+
+        // 🎯 [매우 중요] 대표님 블로그의 실제 카테고리 이름(텍스트)을 아래에 정확히 적어주세요! (띄어쓰기까지 똑같아야 합니다)
+        const targetCategoryName = "마켓 인사이트[평택리포트]"; 
 
         async function loadBlogPosts() {
             const briefingList = document.getElementById('blog-list');
@@ -192,26 +193,35 @@
                 const response = await fetch(apiURL);
                 const data = await response.json();
 
-                if (data.status === 'ok' && data.items.length > 0) {
-                    briefingList.innerHTML = data.items.slice(0, 5).map(post => {
-                        const dateStr = post.pubDate.split(' ')[0].replace(/-/g, '.');
-                        const category = (post.categories && post.categories.length > 0) ? post.categories[0] : 'INSIGHT';
+                if (data.status === 'ok') {
+                    // ⭐ 핵심 기능: 네이버가 준 전체 글 중에서 이름이 똑같은 카테고리만 건져냅니다.
+                    const filteredPosts = data.items.filter(post => {
+                        return post.categories && post.categories.includes(targetCategoryName);
+                    });
 
-                        return `
-                        <a href="${post.link}" target="_blank" class="group flex flex-col md:flex-row md:items-center justify-between py-8 px-4 hover:bg-gray-50 transition-all rounded-2xl border-b border-gray-50 last:border-b-0">
-                            <div class="flex items-center space-x-6 w-full md:w-4/5">
-                                <span class="text-blue-600 font-bold text-[10px] border border-blue-200 px-2 py-0.5 rounded uppercase tracking-tighter shrink-0">${category}</span>
-                                <h4 class="text-lg font-bold group-hover:text-blue-600 transition truncate-text">${post.title}</h4>
-                            </div>
-                            <div class="flex items-center space-x-4 mt-4 md:mt-0 shrink-0">
-                                <span class="text-gray-400 text-xs font-medium">${dateStr}</span>
-                                <span class="text-blue-600 opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-1">→</span>
-                            </div>
-                        </a>
-                        `;
-                    }).join('');
-                } else {
-                    briefingList.innerHTML = `<div class="py-12 text-center text-gray-500">마켓 인사이트 카테고리에 등록된 최신 리포트가 없습니다.</div>`;
+                    // 건져낸 글이 1개라도 있다면 화면에 그립니다.
+                    if (filteredPosts.length > 0) {
+                        briefingList.innerHTML = filteredPosts.slice(0, 5).map(post => {
+                            const dateStr = post.pubDate.split(' ')[0].replace(/-/g, '.');
+                            const category = (post.categories && post.categories.length > 0) ? post.categories[0] : 'INSIGHT';
+
+                            return `
+                            <a href="${post.link}" target="_blank" class="group flex flex-col md:flex-row md:items-center justify-between py-8 px-4 hover:bg-gray-50 transition-all rounded-2xl border-b border-gray-50 last:border-b-0">
+                                <div class="flex items-center space-x-6 w-full md:w-4/5">
+                                    <span class="text-blue-600 font-bold text-[10px] border border-blue-200 px-2 py-0.5 rounded uppercase tracking-tighter shrink-0">${category}</span>
+                                    <h4 class="text-lg font-bold group-hover:text-blue-600 transition truncate-text">${post.title}</h4>
+                                </div>
+                                <div class="flex items-center space-x-4 mt-4 md:mt-0 shrink-0">
+                                    <span class="text-gray-400 text-xs font-medium">${dateStr}</span>
+                                    <span class="text-blue-600 opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-1">→</span>
+                                </div>
+                            </a>
+                            `;
+                        }).join('');
+                    } else {
+                        // 걸러낸 글이 없을 경우
+                        briefingList.innerHTML = `<div class="py-12 text-center text-gray-500">최근 업데이트된 리포트가 없습니다.</div>`;
+                    }
                 }
             } catch (error) {
                 console.error("블로그 데이터를 불러오는 중 오류 발생:", error);
